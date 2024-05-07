@@ -13,6 +13,8 @@ void main() {
           'str\ten_US\t$localeName\r\nscreen_language\tInterface language\tЯзык интерфейса\r\n';
       const testCommaCRLFString =
           'str,en_US,$localeName\r\nscreen_language,Interface language,Язык интерфейса\r\n';
+      const testCommaQuotesInsideCRLFString =
+          'str,en_US,$localeName\r\nscreen_language,"Interface language, Test","Язык интерфейса, Тест"\r\n';
 
       Map<String, dynamic> getResult(
         String testString,
@@ -44,6 +46,11 @@ void main() {
         'testCommaCRLFString'.toUpperCase(),
         {'screen_language': 'Язык интерфейса'},
         getResult(testCommaCRLFString, localeName),
+      );
+      output(
+        'testCommaQuotesInsideCRLFString'.toUpperCase(),
+        {'screen_language': 'Язык интерфейса, Тест'},
+        getResult(testCommaQuotesInsideCRLFString, localeName, false),
       );
       output(
         'testTabLFString, autodetect = false'.toUpperCase(),
