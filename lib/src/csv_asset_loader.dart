@@ -11,12 +11,20 @@ import 'package:flutter/services.dart';
 //
 class CsvAssetLoader extends AssetLoader {
   CSVParser? csvParser;
+  final bool useAutodetect;
+
+  CsvAssetLoader({
+    this.useAutodetect = true,
+  });
 
   @override
   Future<Map<String, dynamic>> load(String path, Locale locale) async {
     if (csvParser == null) {
       log('easy localization loader: load csv file $path');
-      csvParser = CSVParser(await rootBundle.loadString(path));
+      csvParser = CSVParser(
+        await rootBundle.loadString(path),
+        useAutodetect: useAutodetect,
+      );
     } else {
       log('easy localization loader: CSV parser already loaded, read cache');
     }
@@ -51,7 +59,7 @@ class CSVParser {
     this.csvString, {
     this.fieldDelimiter,
     this.eol,
-    this.useAutodetect = false,
+    this.useAutodetect = true,
   }) : lines = CsvToListConverter().convert(
           csvString,
           fieldDelimiter: fieldDelimiter,
