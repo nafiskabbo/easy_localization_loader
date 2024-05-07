@@ -51,7 +51,7 @@ class CSVParser {
     this.csvString, {
     this.fieldDelimiter,
     this.eol,
-    this.useAutodetect = true,
+    this.useAutodetect = false,
   }) : lines = CsvToListConverter().convert(
           csvString,
           fieldDelimiter: fieldDelimiter,
